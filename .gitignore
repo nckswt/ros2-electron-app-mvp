@@ -1,0 +1,6 @@
+node_modules
+dist
+builds
+build
+.DS_Store
+package-lock.json

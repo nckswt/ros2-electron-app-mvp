@@ -1,0 +1,111 @@
+{
+  "name": "ros2-electron-app",
+  "version": "1.0.0",
+  "description": "electronJs/React-based ROS UI",
+  "author": "Nick Sweet",
+  "license": "MIT",
+  "main": "public/main.js",
+  "scripts": {
+    "clean": "rm -rf build dist",
+    "start:local": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
+    "build:local": "webpack --config ./webpack.prd.config.js --mode production",
+    "build": "node  ./node_modules/webpack/bin/webpack.js --config ./webpack.prd.config.js",
+    "dist": "NODE_OPTIONS=\"--max-old-space-size=2048\" npm run build && electron-builder",
+    "dist:prd": "NODE_OPTIONS=\"--max-old-space-size=2048\" npm run build && electron-builder --arm64",
+    "start": "npm run build && electron ./build/main.js",
+    "start:dev": "bnr start:dev",
+    "start:dist": "npm run dist && ./dist/${npm_package_build_linux_executableName}.AppImage",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "betterScripts": {
+    "start:dev": {
+      "command": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "build": {
+    "appId": "com.nckswt.mvpApp",
+    "extends": null,
+    "extraMetadata": {
+      "main": "build/main.js"
+    },
+    "files": [
+      "build/**/*",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "linux": {
+      "executableName": "mvpApp",
+      "artifactName": "mvpApp.${ext}",
+      "category": "System",
+      "target": [
+        {
+          "target": "AppImage"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-decorators": "^7.16.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.16.0",
+    "@babel/plugin-proposal-function-sent": "^7.16.0",
+    "@babel/plugin-proposal-json-strings": "^7.16.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.16.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.16.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.16.0",
+    "@babel/plugin-transform-react-inline-elements": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@svgr/webpack": "^5.5.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-dynamic-import-node": "^2.3.3",
+    "babel-plugin-istanbul": "^6.1.1",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "babel-plugin-react-intl": "^8.2.25",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babili-webpack-plugin": "0.1.2",
+    "better-npm-run": "^0.1.1",
+    "bindings": "^1.5.0",
+    "css-loader": "^6.5.1",
+    "debug": "^4.3.2",
+    "electron": "^12.2.3",
+    "electron-builder": "~22.10.5",
+    "electron-devtools-installer": "3.2.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "5.5.0",
+    "mini-css-extract-plugin": "2.4.4",
+    "node-gyp": "^8.4.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0",
+    "yaml-loader": "^0.6.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.16.3",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "clsx": "^1.1.1",
+    "prop-types": "^15.7.2",
+    "rclnodejs": "^0.20.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

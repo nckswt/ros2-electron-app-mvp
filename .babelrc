@@ -1,0 +1,91 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-json-strings",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    "@babel/plugin-proposal-function-sent",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/plugin-proposal-throw-expressions",
+    "@babel/plugin-transform-react-jsx",
+    "dynamic-import-node"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "react-css-modules",
+          {
+            "generateScopedName": "[name]__[local].[hash:base64:5]",
+            "exclude": "node_modules",
+            "filetypes": {
+              ".css": {
+                "syntax": "postcss"
+              }
+            }
+          }
+        ]
+      ]
+    },
+    "production": {
+      "plugins": [
+        [
+          "react-css-modules",
+          {
+            "generateScopedName": "[hash:base64]",
+            "exclude": "node_modules",
+            "filetypes": {
+              ".css": {
+                "syntax": "postcss"
+              }
+            }
+          }
+        ],
+        [
+          "transform-react-remove-prop-types",
+          {
+            "removeImport": true
+          }
+        ],
+        "@babel/plugin-transform-react-constant-elements",
+        "@babel/plugin-transform-react-inline-elements"
+      ]
+    },
+    "test": {
+      "plugins": [
+        [
+          "react-css-modules",
+          {
+            "generateScopedName": "[name]__[local].[hash:base64:5]",
+            "exclude": "node_modules",
+            "filetypes": {
+              ".css": {
+                "syntax": "postcss"
+              }
+            }
+          }
+        ],
+        [
+          "istanbul",
+          {
+            "exclude": [
+              "**/*.test.js"
+            ]
+          }
+        ]
+      ]
+    }
+  }
+}
