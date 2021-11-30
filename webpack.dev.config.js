@@ -21,6 +21,11 @@ module.exports = {
     ],
   },
   target: 'electron-renderer',
+
+  externals: {
+    rclnodejs: 'rclnodejs'
+  },
+
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({

@@ -12,6 +12,11 @@ module.exports = [{
   mode: 'development',
   target: 'electron-renderer',
   entry: path.join(reactSource, 'index.js'),
+
+  externals: {
+    rclnodejs: 'rclnodejs'
+  },
+
   output: {
     path: defaultOutput,
     filename: 'index.js',

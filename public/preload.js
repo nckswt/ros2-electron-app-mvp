@@ -1,0 +1,1 @@
+window.rclnodejs = require('rclnodejs')
